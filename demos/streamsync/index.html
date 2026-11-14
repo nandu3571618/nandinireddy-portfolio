@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StreamSync — Real-Time AWS Kinesis & WebSocket Stream Engine</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['Fira Code', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #080c14; color: #f8fafc; }
+    .glass {
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+  </style>
+</head>
+<body class="font-sans antialiased min-h-screen p-4 sm:p-8 flex flex-col justify-between">
+  <div class="max-w-7xl mx-auto w-full space-y-6">
+    
+    <!-- Top Nav Header -->
+    <header class="glass rounded-2xl p-4 sm:p-6 flex flex-wrap items-center justify-between gap-4 border border-slate-800">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center font-bold text-white shadow-lg">
+          🌊
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-lg sm:text-xl font-extrabold text-white">StreamSync Engine</h1>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-purple-400 animate-ping"></span> KINESIS DATA STREAMS
+            </span>
+          </div>
+          <p class="text-xs text-slate-400">High-Throughput AWS Kinesis & WebSocket Pipeline</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button id="streamToggleBtn" onclick="toggleStream()" class="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition-all flex items-center gap-1.5 shadow-md">
+          <span>⏸️ Pause Stream</span>
+        </button>
+        <a href="/" class="px-4 py-2 rounded-xl glass hover:bg-slate-800 text-cyan-400 font-semibold text-xs border border-slate-700 transition-colors">
+          ← Back to Portfolio
+        </a>
+      </div>
+    </header>
+
+    <!-- Shards Health Banner -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      <div class="glass p-4 rounded-xl border border-slate-800">
+        <span class="text-[11px] font-mono text-slate-400">Throughput Volume</span>
+        <div class="text-2xl font-extrabold text-white mt-1"><span id="msgCount">14,290</span> msg/s</div>
+      </div>
+      <div class="glass p-4 rounded-xl border border-slate-800">
+        <span class="text-[11px] font-mono text-slate-400">Kinesis Shards</span>
+        <div class="text-2xl font-extrabold text-cyan-300 mt-1">8 Active Shards</div>
+      </div>
+      <div class="glass p-4 rounded-xl border border-slate-800">
+        <span class="text-[11px] font-mono text-slate-400">WebSocket Connections</span>
+        <div class="text-2xl font-extrabold text-purple-300 mt-1">10,480 Live</div>
+      </div>
+      <div class="glass p-4 rounded-xl border border-slate-800">
+        <span class="text-[11px] font-mono text-slate-400">P95 Delivery Latency</span>
+        <div class="text-2xl font-extrabold text-emerald-300 mt-1">&lt; 85ms</div>
+      </div>
+    </div>
+
+    <!-- Live Ingestion Feed Table -->
+    <div class="glass p-6 rounded-2xl border border-slate-800 space-y-4">
+      <div class="flex items-center justify-between">
+        <h2 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+          <span>⚡ Live Stream Partition Feed</span>
+        </h2>
+        <span class="text-xs font-mono text-slate-400">Auto-consuming shard records</span>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left font-mono text-xs">
+          <thead>
+            <tr class="border-b border-slate-800 text-slate-400">
+              <th class="py-2.5 px-3">Timestamp</th>
+              <th class="py-2.5 px-3">Partition Key</th>
+              <th class="py-2.5 px-3">Shard ID</th>
+              <th class="py-2.5 px-3">Payload Type</th>
+              <th class="py-2.5 px-3 text-right">Value</th>
+            </tr>
+          </thead>
+          <tbody id="streamTableBody" class="divide-y divide-slate-800/60 text-slate-300">
+            <!-- Dynamically populated -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="max-w-7xl mx-auto w-full mt-6 text-center text-xs font-mono text-slate-500">
+    StreamSync Engine by Nandini Sharma • Scalable AWS Event-Driven Architecture
+  </footer>
+
+  <script>
+    let active = true;
+    const body = document.getElementById('streamTableBody');
+    const msgCountEl = document.getElementById('msgCount');
+    let count = 14290;
+
+    const symbols = ['AWS/EC2', 'LAMBDA/CALL', 'DYNAMO/RWD', 'S3/PULL', 'KINESIS/INGEST'];
+
+    function addRow() {
+      if (!active) return;
+      count += Math.floor(Math.random() * 20 - 5);
+      msgCountEl.innerText = count.toLocaleString();
+
+      const tr = document.createElement('tr');
+      tr.className = 'hover:bg-slate-900/40 transition-colors animate-pulse';
+      const time = new Date().toISOString().substring(11, 23);
+      const symbol = symbols[Math.floor(Math.random() * symbols.length)];
+      const shard = 'shardId-00000000000' + Math.floor(Math.random() * 8);
+      const pKey = 'pk-' + Math.random().toString(36).substring(2, 8);
+      const val = (Math.random() * 800 + 100).toFixed(2);
+
+      tr.innerHTML = `
+        <td class="py-2.5 px-3 text-slate-400">${time}</td>
+        <td class="py-2.5 px-3 text-cyan-300">${pKey}</td>
+        <td class="py-2.5 px-3 text-slate-400">${shard}</td>
+        <td class="py-2.5 px-3 font-semibold text-white">${symbol}</td>
+        <td class="py-2.5 px-3 text-right text-emerald-400">${val} ms</td>
+      `;
+
+      body.prepend(tr);
+      if (body.children.length > 9) {
+        body.removeChild(body.lastChild);
+      }
+    }
+
+    const interval = setInterval(addRow, 450);
+
+    function toggleStream() {
+      active = !active;
+      const btn = document.getElementById('streamToggleBtn');
+      if (active) {
+        btn.innerText = '⏸️ Pause Stream';
+        btn.className = 'px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition-all flex items-center gap-1.5 shadow-md';
+      } else {
+        btn.innerText = '▶️ Resume Stream';
+        btn.className = 'px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition-all flex items-center gap-1.5 shadow-md';
+      }
+    }
+  </script>
+</body>
+</html>
