@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PulseUI — Frontend Performance & Telemetry Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['Fira Code', 'monospace']
+          },
+          colors: {
+            brand: {
+              cyan: '#38bdf8',
+              indigo: '#818cf8',
+              amber: '#FF9900',
+              emerald: '#10b981',
+              dark: '#0a0d14',
+              surface: '#111726'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #090d16; color: #f1f5f9; }
+    .glass {
+      background: rgba(17, 23, 38, 0.75);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-glow {
+      background: rgba(17, 23, 38, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      box-shadow: 0 0 25px -8px rgba(56, 189, 248, 0.2);
+    }
+  </style>
+</head>
+<body class="font-sans antialiased min-h-screen p-4 sm:p-8 flex flex-col justify-between">
+  <div class="max-w-7xl mx-auto w-full space-y-6">
+    
+    <!-- Top Nav Header -->
+    <header class="glass rounded-2xl p-4 sm:p-6 flex flex-wrap items-center justify-between gap-4 border border-slate-800">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-indigo-600 flex items-center justify-center p-0.5 shadow-lg shadow-cyan-500/20">
+          <div class="w-full h-full bg-[#0d1322] rounded-[10px] flex items-center justify-center font-bold text-cyan-400 text-lg">
+            ⚡
+          </div>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-lg sm:text-xl font-extrabold text-white tracking-tight">PulseUI</h1>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> LIVE TELEMETRY
+            </span>
+          </div>
+          <p class="text-xs text-slate-400">Core Web Vitals & Real-Time Performance Monitor</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <select id="regionSelect" class="bg-slate-900 border border-slate-700 text-xs font-mono text-slate-300 rounded-xl px-3 py-2 outline-none focus:border-cyan-400">
+          <option value="us-east-1">Global Edge 1 (N. Virginia)</option>
+          <option value="us-west-2">Global Edge 2 (Oregon)</option>
+          <option value="ap-south-1">Asia Edge (Mumbai)</option>
+          <option value="eu-west-1">Europe Edge (Ireland)</option>
+        </select>
+        <button onclick="triggerTrafficSpike()" class="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs transition-all flex items-center gap-1.5 shadow-md shadow-amber-500/20">
+          <span>⚡ Simulate Load Spike</span>
+        </button>
+        <a href="/" class="px-4 py-2 rounded-xl glass hover:bg-slate-800 text-cyan-400 font-semibold text-xs border border-slate-700 transition-colors">
+          ← Back to Portfolio
+        </a>
+      </div>
+    </header>
+
+    <!-- Key Metrics Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="glass p-5 rounded-2xl border border-slate-800/80 space-y-1">
+        <span class="text-xs font-mono text-slate-400 uppercase tracking-wider">Lambda Invocations / min</span>
+        <div class="text-3xl font-extrabold text-white flex items-baseline gap-2">
+          <span id="invocationsVal">1,482</span>
+          <span class="text-xs font-mono text-emerald-400">+12.4%</span>
+        </div>
+        <p class="text-[11px] text-slate-500">Auto-scaling concurrency: 34 instances</p>
+      </div>
+
+      <div class="glass p-5 rounded-2xl border border-slate-800/80 space-y-1">
+        <span class="text-xs font-mono text-slate-400 uppercase tracking-wider">P99 Serverless Latency</span>
+        <div class="text-3xl font-extrabold text-cyan-300 flex items-baseline gap-2">
+          <span id="latencyVal">42</span><span class="text-sm font-normal text-slate-400">ms</span>
+          <span class="text-xs font-mono text-emerald-400">Nominal</span>
+        </div>
+        <p class="text-[11px] text-slate-500">CloudFront edge cache hit ratio: 94.8%</p>
+      </div>
+
+      <div class="glass p-5 rounded-2xl border border-slate-800/80 space-y-1">
+        <span class="text-xs font-mono text-slate-400 uppercase tracking-wider">Monthly Run Rate</span>
+        <div class="text-3xl font-extrabold text-amber-300 flex items-baseline gap-2">
+          $<span id="costVal">148.20</span>
+          <span class="text-xs font-mono text-cyan-400">-34% Saved</span>
+        </div>
+        <p class="text-[11px] text-slate-500">Serverless on-demand tier optimization</p>
+      </div>
+
+      <div class="glass p-5 rounded-2xl border border-slate-800/80 space-y-1">
+        <span class="text-xs font-mono text-slate-400 uppercase tracking-wider">DynamoDB Throughput</span>
+        <div class="text-3xl font-extrabold text-emerald-300 flex items-baseline gap-2">
+          <span id="ddbVal">9.4k</span><span class="text-sm font-normal text-slate-400">ops/s</span>
+          <span class="text-xs font-mono text-emerald-400">0 Throttles</span>
+        </div>
+        <p class="text-[11px] text-slate-500">Payload compression active (Brotli)</p>
+      </div>
+    </div>
+
+    <!-- Live Telemetry Canvas & Live Log Stream -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      
+      <!-- Real-Time Metrics Canvas Graph -->
+      <div class="lg:col-span-8 glass-glow p-6 rounded-2xl border border-slate-800 space-y-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <h2 class="text-sm font-bold text-white uppercase tracking-wider">Real-Time Ingestion & Latency Waveform</h2>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300">100ms Interval</span>
+          </div>
+          <div class="flex items-center gap-4 text-xs font-mono text-slate-400">
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span> Requests</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span> Latency (ms)</span>
+          </div>
+        </div>
+
+        <div class="relative h-64 w-full bg-slate-950/70 rounded-xl border border-slate-800/80 overflow-hidden">
+          <canvas id="telemetryChart" class="w-full h-full"></canvas>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between text-xs text-slate-400 pt-2 border-t border-slate-800">
+          <span>Real-Time Web Vitals Ingest: Active</span>
+          <span>Target Architecture: Client Telemetry ➔ State Store ➔ Canvas 60 FPS</span>
+        </div>
+      </div>
+
+      <!-- Real-Time Event Stream -->
+      <div class="lg:col-span-4 glass p-6 rounded-2xl border border-slate-800 flex flex-col justify-between space-y-4">
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+              Event Stream
+            </h3>
+            <span class="text-[10px] font-mono text-slate-500">Live JSON</span>
+          </div>
+
+          <div id="logStream" class="space-y-2 font-mono text-[11px] text-slate-300 max-h-[220px] overflow-y-auto pr-1">
+            <div class="p-2 rounded bg-slate-950/80 border border-slate-800 text-emerald-400">
+              [INFO] Core Web Vitals LCP 0.62s (Rating: Good)
+            </div>
+            <div class="p-2 rounded bg-slate-950/80 border border-slate-800 text-cyan-300">
+              [RENDER] 60 FPS Canvas Waveform Synchronized
+            </div>
+            <div class="p-2 rounded bg-slate-950/80 border border-slate-800 text-slate-400">
+              [API] P99 Network response time: 24ms
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Scale Concurrency Slider -->
+        <div class="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 space-y-2">
+          <div class="flex justify-between text-xs">
+            <span class="text-slate-400 font-semibold">Test Scale Concurrency:</span>
+            <span id="sliderLabel" class="text-cyan-400 font-mono font-bold">10,000 req/min</span>
+          </div>
+          <input id="scaleSlider" type="range" min="1000" max="100000" step="1000" value="10000" 
+            class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-400"
+            oninput="updateScale(this.value)">
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer class="max-w-7xl mx-auto w-full mt-6 text-center text-xs font-mono text-slate-500">
+    PulseUI by Nandini Reddy • High-Performance Web Architecture
+  </footer>
+
+  <script>
+    const canvas = document.getElementById('telemetryChart');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    const points = Array(50).fill(30);
+    const latencyPoints = Array(50).fill(40);
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const w = canvas.width;
+      const h = canvas.height;
+      const step = w / (points.length - 1);
+
+      // Grid Lines
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+      ctx.lineWidth = 1;
+      for (let y = 0; y < h; y += 40) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(w, y);
+        ctx.stroke();
+      }
+
+      // Draw Requests Line (Cyan)
+      ctx.beginPath();
+      ctx.moveTo(0, h - (points[0] / 100) * h);
+      for (let i = 1; i < points.length; i++) {
+        ctx.lineTo(i * step, h - (points[i] / 100) * h);
+      }
+      ctx.strokeStyle = '#38bdf8';
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+
+      // Draw Latency Line (Amber)
+      ctx.beginPath();
+      ctx.moveTo(0, h - (latencyPoints[0] / 120) * h);
+      for (let i = 1; i < latencyPoints.length; i++) {
+        ctx.lineTo(i * step, h - (latencyPoints[i] / 120) * h);
+      }
+      ctx.strokeStyle = '#FF9900';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    }
+
+    let spikeFactor = 1;
+    function updateMetrics() {
+      const baseReq = (Math.random() * 20 + 25) * spikeFactor;
+      const baseLat = (Math.random() * 15 + 30) * (spikeFactor > 1 ? 1.6 : 1);
+
+      points.shift();
+      points.push(Math.min(baseReq, 95));
+
+      latencyPoints.shift();
+      latencyPoints.push(Math.min(baseLat, 110));
+
+      document.getElementById('invocationsVal').innerText = Math.round(baseReq * 45).toLocaleString();
+      document.getElementById('latencyVal').innerText = Math.round(baseLat);
+
+      if (spikeFactor > 1) {
+        spikeFactor = Math.max(1, spikeFactor - 0.1);
+      }
+
+      draw();
+    }
+    setInterval(updateMetrics, 120);
+
+    function triggerTrafficSpike() {
+      spikeFactor = 2.4;
+      const log = document.getElementById('logStream');
+      const item = document.createElement('div');
+      item.className = 'p-2 rounded bg-amber-950/60 border border-amber-500/40 text-amber-300 font-bold';
+      item.innerText = `[ALERT] Traffic spike detected! Concurrency auto-scaled to 85.`;
+      log.prepend(item);
+    }
+
+    function updateScale(val) {
+      document.getElementById('sliderLabel').innerText = parseInt(val).toLocaleString() + ' req/min';
+      const cost = ((val * 60 * 24 * 30 * 0.0000002) + 12).toFixed(2);
+      document.getElementById('costVal').innerText = cost;
+    }
+  </script>
+</body>
+</html>
