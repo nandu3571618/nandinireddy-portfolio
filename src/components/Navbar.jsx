@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Cloud, Menu, X, Terminal, ArrowUpRight, ShieldCheck } from 'lucide-react';
+import { Menu, X, Terminal, ArrowUpRight, ShieldCheck } from 'lucide-react';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -10,7 +10,7 @@ export default function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      const sections = ['hero', 'about', 'skills', 'architecture', 'projects', 'experience', 'contact'];
+      const sections = ['hero', 'about', 'skills', 'projects', 'experience', 'contact'];
       const scrollPos = window.scrollY + 200;
 
       for (const section of sections) {
@@ -33,7 +33,6 @@ export default function Navbar() {
   const navLinks = [
     { name: 'About', href: '#about', id: 'about' },
     { name: 'Skills', href: '#skills', id: 'skills' },
-    { name: 'AWS Cloud', href: '#architecture', id: 'architecture', badge: 'Live Demo' },
     { name: 'Projects', href: '#projects', id: 'projects' },
     { name: 'Experience', href: '#experience', id: 'experience' },
     { name: 'Contact', href: '#contact', id: 'contact' },
@@ -81,11 +80,6 @@ export default function Navbar() {
                 }`}
               >
                 {link.name}
-                {link.badge && (
-                  <span className="text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
-                    {link.badge}
-                  </span>
-                )}
                 {isActive && (
                   <span className="absolute bottom-0 left-3 right-3 h-[2px] bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400 rounded-full shadow-[0_0_8px_#38bdf8]" />
                 )}
@@ -98,8 +92,8 @@ export default function Navbar() {
         <div className="hidden lg:flex items-center gap-3">
           <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-slate-700/80 text-xs text-slate-300 shadow-sm">
             <span className="w-2 h-2 rounded-full bg-emerald-400 cyber-beacon" />
-            <span className="text-slate-400 font-mono text-[11px]">TCS 5+ Yrs</span>
-            <span className="text-emerald-400 font-medium">Available</span>
+            <span className="text-slate-400 font-mono text-[11px]">TCS 2021–2024</span>
+            <span className="text-emerald-400 font-medium">Immediate Joiner</span>
           </div>
 
           <a
@@ -135,18 +129,13 @@ export default function Navbar() {
                 className="flex items-center justify-between px-4 py-2.5 rounded-xl text-slate-200 hover:text-cyan-400 hover:bg-slate-800/50 font-medium transition-colors"
               >
                 <span>{link.name}</span>
-                {link.badge && (
-                  <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
-                    {link.badge}
-                  </span>
-                )}
               </a>
             ))}
             <div className="pt-3 border-t border-slate-800/80 flex flex-col gap-2.5">
               <div className="flex items-center justify-between px-4 py-2 rounded-lg bg-slate-900/60 text-xs text-slate-400">
-                <span>AWS Health:</span>
+                <span>Status:</span>
                 <span className="text-emerald-400 font-mono font-medium flex items-center gap-1">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" /> Operational
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" /> Immediate Joiner
                 </span>
               </div>
               <a

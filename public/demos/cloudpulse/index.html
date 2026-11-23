@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CloudPulse — AWS Serverless Telemetry & Cost Dashboard</title>
+  <title>PulseUI — Frontend Performance & Telemetry Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script>
@@ -50,28 +50,28 @@
     <!-- Top Nav Header -->
     <header class="glass rounded-2xl p-4 sm:p-6 flex flex-wrap items-center justify-between gap-4 border border-slate-800">
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-orange-600 flex items-center justify-center p-0.5 shadow-lg shadow-orange-500/20">
-          <div class="w-full h-full bg-[#0d1322] rounded-[10px] flex items-center justify-center font-bold text-amber-400 text-lg">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-indigo-600 flex items-center justify-center p-0.5 shadow-lg shadow-cyan-500/20">
+          <div class="w-full h-full bg-[#0d1322] rounded-[10px] flex items-center justify-center font-bold text-cyan-400 text-lg">
             ⚡
           </div>
         </div>
         <div>
           <div class="flex items-center gap-2">
-            <h1 class="text-lg sm:text-xl font-extrabold text-white tracking-tight">CloudPulse</h1>
+            <h1 class="text-lg sm:text-xl font-extrabold text-white tracking-tight">PulseUI</h1>
             <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center gap-1">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> LIVE TELEMETRY
             </span>
           </div>
-          <p class="text-xs text-slate-400">AWS CloudWatch & Lambda Anomaly Observability Platform</p>
+          <p class="text-xs text-slate-400">Core Web Vitals & Real-Time Performance Monitor</p>
         </div>
       </div>
 
       <div class="flex items-center gap-3">
         <select id="regionSelect" class="bg-slate-900 border border-slate-700 text-xs font-mono text-slate-300 rounded-xl px-3 py-2 outline-none focus:border-cyan-400">
-          <option value="us-east-1">AWS us-east-1 (N. Virginia)</option>
-          <option value="us-west-2">AWS us-west-2 (Oregon)</option>
-          <option value="ap-south-1">AWS ap-south-1 (Mumbai)</option>
-          <option value="eu-west-1">AWS eu-west-1 (Ireland)</option>
+          <option value="us-east-1">Global Edge 1 (N. Virginia)</option>
+          <option value="us-west-2">Global Edge 2 (Oregon)</option>
+          <option value="ap-south-1">Asia Edge (Mumbai)</option>
+          <option value="eu-west-1">Europe Edge (Ireland)</option>
         </select>
         <button onclick="triggerTrafficSpike()" class="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs transition-all flex items-center gap-1.5 shadow-md shadow-amber-500/20">
           <span>⚡ Simulate Load Spike</span>
@@ -142,17 +142,17 @@
         </div>
 
         <div class="flex flex-wrap items-center justify-between text-xs text-slate-400 pt-2 border-t border-slate-800">
-          <span>AWS CloudWatch Metric Ingest: Active</span>
-          <span>Target Architecture: API Gateway HTTP ➔ Lambda ➔ DynamoDB</span>
+          <span>Real-Time Web Vitals Ingest: Active</span>
+          <span>Target Architecture: Client Telemetry ➔ State Store ➔ Canvas 60 FPS</span>
         </div>
       </div>
 
-      <!-- Real-Time CloudWatch Event Stream -->
+      <!-- Real-Time Event Stream -->
       <div class="lg:col-span-4 glass p-6 rounded-2xl border border-slate-800 flex flex-col justify-between space-y-4">
         <div>
           <div class="flex items-center justify-between mb-3">
             <h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+              <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
               Event Stream
             </h3>
             <span class="text-[10px] font-mono text-slate-500">Live JSON</span>
@@ -160,25 +160,25 @@
 
           <div id="logStream" class="space-y-2 font-mono text-[11px] text-slate-300 max-h-[220px] overflow-y-auto pr-1">
             <div class="p-2 rounded bg-slate-950/80 border border-slate-800 text-emerald-400">
-              [INFO] CloudFront cache hit from edge IAD-89
+              [INFO] Core Web Vitals LCP 0.62s (Rating: Good)
             </div>
             <div class="p-2 rounded bg-slate-950/80 border border-slate-800 text-cyan-300">
-              [LAMBDA] Invocation 9b4d8-c81 completed in 38ms
+              [RENDER] 60 FPS Canvas Waveform Synchronized
             </div>
             <div class="p-2 rounded bg-slate-950/80 border border-slate-800 text-slate-400">
-              [DYNAMODB] PutItem status 200 (CapacityUnits: 1.0)
+              [API] P99 Network response time: 24ms
             </div>
           </div>
         </div>
 
-        <!-- Interactive Cost Estimator Slider -->
+        <!-- Interactive Scale Concurrency Slider -->
         <div class="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 space-y-2">
           <div class="flex justify-between text-xs">
             <span class="text-slate-400 font-semibold">Test Scale Concurrency:</span>
-            <span id="sliderLabel" class="text-amber-400 font-mono font-bold">10,000 req/min</span>
+            <span id="sliderLabel" class="text-cyan-400 font-mono font-bold">10,000 req/min</span>
           </div>
           <input id="scaleSlider" type="range" min="1000" max="100000" step="1000" value="10000" 
-            class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-amber-400"
+            class="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-400"
             oninput="updateScale(this.value)">
         </div>
 
@@ -189,7 +189,7 @@
   </div>
 
   <footer class="max-w-7xl mx-auto w-full mt-6 text-center text-xs font-mono text-slate-500">
-    CloudPulse by Nandini Sharma • Production Ready on AWS Serverless Architecture
+    PulseUI by Nandini Reddy • High-Performance Web Architecture
   </footer>
 
   <script>

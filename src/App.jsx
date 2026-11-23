@@ -4,7 +4,6 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
-import AwsArchitecture from './components/AwsArchitecture';
 import Projects from './components/Projects';
 import ProjectModal from './components/ProjectModal';
 import Experience from './components/Experience';
@@ -27,7 +26,6 @@ export default function App() {
         <Hero />
         <About />
         <Skills />
-        <AwsArchitecture />
         <Projects onSelectProject={(p) => setSelectedProject(p)} />
         <Experience />
         <Contact />

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StreamSync — Real-Time AWS Kinesis & WebSocket Stream Engine</title>
+  <title>StreamSync — Real-Time Event & WebSocket Stream Engine</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script>
@@ -41,10 +41,10 @@
           <div class="flex items-center gap-2">
             <h1 class="text-lg sm:text-xl font-extrabold text-white">StreamSync Engine</h1>
             <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 flex items-center gap-1">
-              <span class="w-1.5 h-1.5 rounded-full bg-purple-400 animate-ping"></span> KINESIS DATA STREAMS
+              <span class="w-1.5 h-1.5 rounded-full bg-purple-400 animate-ping"></span> EVENT-DRIVEN STREAM
             </span>
           </div>
-          <p class="text-xs text-slate-400">High-Throughput AWS Kinesis & WebSocket Pipeline</p>
+          <p class="text-xs text-slate-400">High-Throughput Reactive WebSocket Stream Pipeline</p>
         </div>
       </div>
 
@@ -108,7 +108,7 @@
   </div>
 
   <footer class="max-w-7xl mx-auto w-full mt-6 text-center text-xs font-mono text-slate-500">
-    StreamSync Engine by Nandini Sharma • Scalable AWS Event-Driven Architecture
+    StreamSync Engine by Nandini Reddy • Real-Time Web Architecture
   </footer>
 
   <script>
@@ -117,7 +117,7 @@
     const msgCountEl = document.getElementById('msgCount');
     let count = 14290;
 
-    const symbols = ['AWS/EC2', 'LAMBDA/CALL', 'DYNAMO/RWD', 'S3/PULL', 'KINESIS/INGEST'];
+    const symbols = ['API/POST', 'WS/EVENT', 'STATE/SYNC', 'REDUX/DISPATCH', 'SOCKET/PULL'];
 
     function addRow() {
       if (!active) return;

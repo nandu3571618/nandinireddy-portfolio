@@ -3,7 +3,6 @@ import { skillCategories } from '../data/portfolioData';
 import { 
   Layout, 
   Server, 
-  Cloud, 
   Terminal, 
   Cpu, 
   Layers, 
@@ -12,7 +11,10 @@ import {
   Palette,
   ShieldCheck,
   Zap,
-  TrendingUp
+  TrendingUp,
+  Globe,
+  Smartphone,
+  Gauge
 } from 'lucide-react';
 
 export default function Skills() {
@@ -21,7 +23,7 @@ export default function Skills() {
   const categoryIcons = {
     frontend: Layout,
     architecture: Server,
-    cloud: Cloud,
+    quality: Zap,
     tools: Palette,
   };
 
@@ -42,7 +44,7 @@ export default function Skills() {
             <span>Technical Capabilities & Mastery</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
-            ReactJS, Micro-Frontends & <span className="text-gradient">Cloud Architecture</span>
+            ReactJS, Micro-Frontends & <span className="text-gradient">Component Systems</span>
           </h2>
           <p className="text-slate-400 text-base sm:text-lg">
             5+ years of production-proven frameworks, low-code enterprise insurance systems, and modern UI tooling.
@@ -127,7 +129,7 @@ export default function Skills() {
               <h3 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
                 <span>Enterprise Insurance Domain Specialist</span>
                 <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                  5+ Years TCS
+                  TCS (2021–2024)
                 </span>
               </h3>
               <p className="text-sm text-slate-400 mt-1 max-w-2xl leading-relaxed">

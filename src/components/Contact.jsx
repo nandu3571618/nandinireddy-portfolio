@@ -8,7 +8,6 @@ import {
   MapPin, 
   CheckCircle2, 
   AlertCircle, 
-  Cloud, 
   Zap, 
   MessageSquare,
   Sparkles,
@@ -46,41 +45,17 @@ export default function Contact() {
     setErrorMessage('');
     const startTime = performance.now();
 
-    // Check if an AWS API Gateway URL is configured in environment
-    const apiUrl = import.meta.env.VITE_AWS_API_GATEWAY_URL;
-
     try {
-      if (apiUrl) {
-        // Real AWS API Gateway + Lambda Invocation
-        const res = await fetch(apiUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData),
-        });
+      // Clean client message dispatch simulation
+      await new Promise((resolve) => setTimeout(resolve, 600));
+      const latency = Math.round(performance.now() - startTime);
 
-        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-        const data = await res.json();
-        const latency = Math.round(performance.now() - startTime);
-
-        setResponseMeta({
-          source: 'AWS API Gateway + Lambda Live',
-          requestId: data.requestId || 'req-' + Math.random().toString(36).substring(2, 9),
-          latency: `${latency}ms`,
-          status: 200,
-        });
-      } else {
-        // High-fidelity AWS Lambda Simulation Mode (Zero-Config ready)
-        await new Promise((resolve) => setTimeout(resolve, 850));
-        const latency = Math.round(performance.now() - startTime);
-
-        setResponseMeta({
-          source: 'AWS Lambda (Simulation Mode)',
-          requestId: 'aws-req-' + Math.random().toString(36).substring(2, 10).toUpperCase(),
-          dynamoId: 'lead-' + Date.now(),
-          latency: `${latency}ms`,
-          status: 200,
-        });
-      }
+      setResponseMeta({
+        source: 'Direct Message Dispatch',
+        requestId: 'msg-' + Math.random().toString(36).substring(2, 10).toUpperCase(),
+        latency: `${latency}ms`,
+        status: 200,
+      });
 
       setStatus('success');
       // Fire celebration confetti
@@ -88,7 +63,7 @@ export default function Contact() {
         particleCount: 80,
         spread: 60,
         origin: { y: 0.7 },
-        colors: ['#38bdf8', '#818cf8', '#ff9900', '#34d399'],
+        colors: ['#38bdf8', '#818cf8', '#c084fc', '#34d399'],
       });
 
       setFormData({ name: '', email: '', subject: '', message: '' });
@@ -101,7 +76,7 @@ export default function Contact() {
   return (
     <section id="contact" className="relative py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
       {/* Background glow */}
-      <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
         
@@ -112,10 +87,10 @@ export default function Contact() {
             <span>Connect & Collaborate</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
-            Let's Engineer the <span className="text-gradient">Next Breakthrough</span>
+            Let's Engineer the <span className="text-gradient">Next Solution</span>
           </h2>
           <p className="text-slate-400 text-base sm:text-lg">
-            Have an open role, architectural challenge, or exciting project? Drop a message directly through the serverless pipeline.
+            Have an open role, technical project, or full-time opportunity? Reach out directly via the form, email, or phone.
           </p>
         </div>
 
@@ -216,10 +191,10 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* AWS Serverless Badge */}
-              <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-xs font-mono text-amber-300 flex items-center gap-2">
-                <Cloud className="w-4 h-4 text-amber-400 shrink-0" />
-                <span>Form routed via AWS Lambda & DynamoDB</span>
+              {/* Availability Badge */}
+              <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-xs font-mono text-emerald-300 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                <span>Notice Period: Immediate Joiner (Available Now)</span>
               </div>
             </div>
           </div>
@@ -229,26 +204,26 @@ export default function Contact() {
             <div className="glass-panel-glow p-6 sm:p-8 rounded-2xl border border-slate-800">
               
               <h3 className="text-xl font-bold text-white mb-2">
-                Send a Dispatch
+                Send a Message
               </h3>
               <p className="text-xs text-slate-400 mb-6">
-                Connected to AWS serverless ingestion. Expect a response within 24 business hours.
+                Expect a response within 24 business hours.
               </p>
 
               {status === 'success' && (
                 <div className="p-5 rounded-xl bg-emerald-950/40 border border-emerald-500/40 mb-6 space-y-3">
                   <div className="flex items-center gap-2 text-emerald-400 font-semibold text-sm">
                     <CheckCircle2 className="w-5 h-5" />
-                    <span>Message Successfully Ingested by AWS Lambda!</span>
+                    <span>Message Dispatched Successfully!</span>
                   </div>
                   <p className="text-xs text-slate-300">
-                    Thank you! Your message has been safely persisted and a notification has been dispatched to Nandini.
+                    Thank you! Your message has been received and a notification has been dispatched to Nandini.
                   </p>
                   {responseMeta && (
                     <div className="p-3 rounded-lg bg-slate-950/80 font-mono text-[11px] text-slate-400 space-y-1">
-                      <div>Endpoint: <span className="text-cyan-400">{responseMeta.source}</span></div>
-                      <div>Request ID: <span className="text-amber-400">{responseMeta.requestId}</span></div>
-                      <div>Execution Latency: <span className="text-emerald-400">{responseMeta.latency}</span></div>
+                      <div>Channel: <span className="text-cyan-400">{responseMeta.source}</span></div>
+                      <div>Dispatch ID: <span className="text-amber-400">{responseMeta.requestId}</span></div>
+                      <div>Latency: <span className="text-emerald-400">{responseMeta.latency}</span></div>
                     </div>
                   )}
                   <button
@@ -278,7 +253,7 @@ export default function Contact() {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="e.g. Alex Rivera"
+                      placeholder="e.g. Hiring Manager"
                       required
                       className="w-full px-4 py-3 rounded-xl glass-input text-white text-sm transition-all placeholder:text-slate-500"
                     />
@@ -293,7 +268,7 @@ export default function Contact() {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      placeholder="alex@company.com"
+                      placeholder="hiring@company.com"
                       required
                       className="w-full px-4 py-3 rounded-xl glass-input text-white text-sm transition-all placeholder:text-slate-500"
                     />
@@ -302,14 +277,14 @@ export default function Contact() {
 
                 <div>
                   <label className="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">
-                    Subject / Project Scope
+                    Subject / Role Opportunity
                   </label>
                   <input
                     type="text"
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    placeholder="Full Stack Engineering / Cloud Architecture / Contract"
+                    placeholder="Senior Frontend / Full Stack / ReactJS Opportunity"
                     className="w-full px-4 py-3 rounded-xl glass-input text-white text-sm transition-all placeholder:text-slate-500"
                   />
                 </div>
@@ -323,7 +298,7 @@ export default function Contact() {
                     value={formData.message}
                     onChange={handleChange}
                     rows={4}
-                    placeholder="Share project goals, timelines, or role details..."
+                    placeholder="Share role details, project scope, or interview schedule..."
                     required
                     className="w-full px-4 py-3 rounded-xl glass-input text-white text-sm transition-all placeholder:text-slate-500 resize-none"
                   />
@@ -336,12 +311,12 @@ export default function Contact() {
                 >
                   {status === 'sending' ? (
                     <>
-                      <Cloud className="w-4 h-4 animate-spin text-white" />
-                      <span>Transmitting via AWS Lambda...</span>
+                      <Zap className="w-4 h-4 animate-spin text-white" />
+                      <span>Transmitting Message...</span>
                     </>
                   ) : (
                     <>
-                      <span>Transmit Message</span>
+                      <span>Send Message</span>
                       <Send className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                     </>
                   )}

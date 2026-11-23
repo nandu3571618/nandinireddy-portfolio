@@ -27,7 +27,7 @@ export default function ParticleBackground() {
       'rgba(129, 140, 248, ',  // indigo
       'rgba(192, 132, 252, ',  // purple
       'rgba(244, 114, 182, ',  // pink
-      'rgba(255, 153, 0, ',    // aws amber
+      'rgba(52, 211, 153, ',   // emerald
     ];
 
     for (let i = 0; i < particleCount; i++) {

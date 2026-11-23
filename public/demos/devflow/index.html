@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DevFlow — AI Code Review & AWS CI/CD Pipeline</title>
+  <title>DevFlow — AI Code Review & CI/CD Pipeline Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script>
@@ -41,16 +41,16 @@
           <div class="flex items-center gap-2">
             <h1 class="text-lg sm:text-xl font-extrabold text-white">DevFlow AI</h1>
             <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
-              AWS BEDROCK & CI/CD
+              AI & CI/CD PIPELINE
             </span>
           </div>
-          <p class="text-xs text-slate-400">Automated Pull Request Code Review & S3 Deploy Pipeline</p>
+          <p class="text-xs text-slate-400">Automated Pull Request Code Review & Deployment Workflow</p>
         </div>
       </div>
 
       <div class="flex items-center gap-3">
         <button onclick="runPipeline()" id="deployBtn" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white font-bold text-xs transition-all flex items-center gap-2 shadow-lg shadow-cyan-500/25">
-          <span>🚀 Run CI/CD Deploy Pipeline</span>
+          <span>🚀 Run CI/CD Pipeline</span>
         </button>
         <a href="/" class="px-4 py-2.5 rounded-xl glass hover:bg-slate-800 text-cyan-400 font-semibold text-xs border border-slate-700 transition-colors">
           ← Back to Portfolio
@@ -61,7 +61,7 @@
     <!-- Pipeline Stages Visualizer -->
     <div class="glass p-5 rounded-2xl border border-slate-800">
       <div class="flex items-center justify-between mb-4">
-        <span class="text-xs font-mono text-slate-400 uppercase tracking-wider">AWS Automated Pipeline Execution</span>
+        <span class="text-xs font-mono text-slate-400 uppercase tracking-wider">Automated Pipeline Execution</span>
         <span id="pipelineStatus" class="text-xs font-mono text-emerald-400">Ready to Trigger</span>
       </div>
 
@@ -81,25 +81,25 @@
             <span class="font-bold text-slate-300">2. AI Security Scan</span>
             <span id="badge2" class="text-[10px] font-mono text-slate-500">Idle</span>
           </div>
-          <p class="text-[11px] text-slate-400">AWS Bedrock / Claude Diff</p>
+          <p class="text-[11px] text-slate-400">AST Analysis & Security Diff</p>
         </div>
 
         <!-- Stage 3 -->
         <div id="stage3" class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 transition-all">
           <div class="flex items-center justify-between text-xs mb-1">
-            <span class="font-bold text-slate-300">3. S3 Bucket Sync</span>
+            <span class="font-bold text-slate-300">3. Bundle Optimization</span>
             <span id="badge3" class="text-[10px] font-mono text-slate-500">Idle</span>
           </div>
-          <p class="text-[11px] text-slate-400">Sync dist/ with OAC</p>
+          <p class="text-[11px] text-slate-400">Minification & Tree Shaking</p>
         </div>
 
         <!-- Stage 4 -->
         <div id="stage4" class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800 transition-all">
           <div class="flex items-center justify-between text-xs mb-1">
-            <span class="font-bold text-slate-300">4. CloudFront Edge</span>
+            <span class="font-bold text-slate-300">4. Production Release</span>
             <span id="badge4" class="text-[10px] font-mono text-slate-500">Idle</span>
           </div>
-          <p class="text-[11px] text-slate-400">Purge Edge PoPs (/*)</p>
+          <p class="text-[11px] text-slate-400">Deploy Static Assets</p>
         </div>
       </div>
     </div>
@@ -114,7 +114,7 @@
             <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
             <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
             <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
-            <span class="ml-2 font-mono text-xs text-slate-400">aws-lambda-handler.js</span>
+            <span class="ml-2 font-mono text-xs text-slate-400">api-handler.js</span>
           </div>
           <button onclick="analyzeCode()" class="px-3 py-1 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 text-xs font-mono border border-cyan-500/30">
             ⚡ Inspect with AI
@@ -122,9 +122,9 @@
         </div>
 
         <textarea id="codeEditor" rows="12" class="w-full bg-slate-950/80 font-mono text-xs text-slate-200 p-4 rounded-xl border border-slate-800 outline-none focus:border-cyan-400 leading-relaxed resize-none">
-// Pull Request #42: Cloud Native Handler
-const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
-const client = new DynamoDBClient({ region: 'us-east-1' });
+// Pull Request #42: Enterprise API Handler
+const { Pool } = require('pg');
+const pool = new Pool();
 
 exports.handler = async (event) => {
   const payload = JSON.parse(event.body || '{}');
@@ -145,7 +145,7 @@ exports.handler = async (event) => {
         <div>
           <div class="flex items-center justify-between mb-3">
             <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-              <span>🧠 AWS Bedrock PR Intelligence</span>
+              <span>🧠 AI Code Review Intelligence</span>
             </h3>
             <span class="text-[10px] font-mono text-emerald-400">Score: 98/100</span>
           </div>
@@ -153,24 +153,24 @@ exports.handler = async (event) => {
           <div id="aiOutput" class="space-y-3 text-xs leading-relaxed">
             <div class="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800">
               <span class="text-cyan-400 font-semibold">Security Check Passed:</span>
-              <p class="text-slate-400 mt-1">No hardcoded AWS credentials or environment secret leaks detected.</p>
+              <p class="text-slate-400 mt-1">No hardcoded credentials or environment secret leaks detected.</p>
             </div>
 
             <div class="p-3.5 rounded-xl bg-slate-950/70 border border-slate-800">
-              <span class="text-amber-400 font-semibold">Performance Suggestion:</span>
-              <p class="text-slate-400 mt-1">Move DynamoDBClient instantiation outside handler scope to reuse connection pools across warm Lambda invocations.</p>
+              <span class="text-cyan-400 font-semibold">Performance Suggestion:</span>
+              <p class="text-slate-400 mt-1">Component state properly memoized with useMemo to prevent unnecessary re-renders.</p>
             </div>
 
             <div class="p-3.5 rounded-xl bg-emerald-950/20 border border-emerald-500/30 text-emerald-300">
               <span class="font-bold">Ready for Production Deploy:</span>
-              <p class="mt-0.5 text-slate-400">Zero breaking API changes. IAM role least-privilege verified.</p>
+              <p class="mt-0.5 text-slate-400">Zero breaking API changes. Strict type validation verified.</p>
             </div>
           </div>
         </div>
 
         <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] font-mono text-slate-500">
-          <span>Bedrock Model: Claude 3.5 Sonnet</span>
-          <span>Latency: 410ms</span>
+          <span>AI Audit Engine: Active</span>
+          <span>Latency: 310ms</span>
         </div>
       </div>
 
@@ -179,7 +179,7 @@ exports.handler = async (event) => {
   </div>
 
   <footer class="max-w-7xl mx-auto w-full mt-6 text-center text-xs font-mono text-slate-500">
-    DevFlow AI by Nandini Sharma • Automated AWS CI/CD Pipeline
+    DevFlow AI by Nandini Reddy • Automated CI/CD Pipeline
   </footer>
 
   <script>
@@ -213,11 +213,11 @@ exports.handler = async (event) => {
         b.className = 'text-[10px] font-mono text-emerald-400 font-bold';
       }
 
-      status.innerText = '✅ Deployed to CloudFront Globally!';
+      status.innerText = '✅ Production Pipeline Succeeded!';
       btn.innerText = '🎉 Build Succeeded!';
       setTimeout(() => {
         btn.disabled = false;
-        btn.innerText = '🚀 Run CI/CD Deploy Pipeline';
+        btn.innerText = '🚀 Run CI/CD Pipeline';
       }, 3000);
     }
 
@@ -225,7 +225,7 @@ exports.handler = async (event) => {
       const out = document.getElementById('aiOutput');
       out.innerHTML = `
         <div class="p-3.5 rounded-xl bg-cyan-950/30 border border-cyan-500/40 text-cyan-300 animate-pulse">
-          Analyzing AST and AST dependencies with AWS Bedrock...
+          Analyzing AST and code structure with AI engine...
         </div>
       `;
       setTimeout(() => {

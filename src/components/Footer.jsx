@@ -1,6 +1,6 @@
 import React from 'react';
 import { personalData } from '../data/portfolioData';
-import { Cloud, Heart, ArrowUp, Mail } from 'lucide-react';
+import { Code2, Heart, ArrowUp, Mail } from 'lucide-react';
 import { GithubIcon, LinkedinIcon, TwitterIcon } from './Icons';
 
 export default function Footer() {
@@ -18,15 +18,15 @@ export default function Footer() {
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500 to-indigo-600 flex items-center justify-center p-0.5">
                 <div className="w-full h-full bg-[#0a0d14] rounded-[6px] flex items-center justify-center">
-                  <Cloud className="w-4 h-4 text-cyan-400" />
+                  <Code2 className="w-4 h-4 text-cyan-400" />
                 </div>
               </div>
               <span className="font-bold text-lg text-white">
-                {personalData.name}<span className="text-cyan-400">.cloud</span>
+                {personalData.name}<span className="text-cyan-400">.dev</span>
               </span>
             </div>
             <p className="text-xs sm:text-sm text-slate-400 max-w-md">
-              Full Stack Developer & AWS Cloud Specialist building high-velocity digital experiences with modern web technologies and resilient cloud architectures.
+              Senior Frontend ReactJS Developer & UX Architect building high-performance web applications, scalable micro-frontends, and user-centric interfaces.
             </p>
           </div>
 
@@ -87,12 +87,12 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} {personalData.name} {personalData.surname}. All rights reserved.
           </div>
           <div className="flex items-center gap-2">
-            <span>Hosted on</span>
-            <span className="text-amber-400 font-bold">AWS S3 + CloudFront</span>
+            <span>Built with</span>
+            <span className="text-cyan-400 font-bold">React 18 + Vite + Tailwind CSS</span>
             <span>•</span>
             <span className="text-emerald-400 flex items-center gap-1">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              TLS 1.3 Secure
+              Production Ready
             </span>
           </div>
         </div>

@@ -2,7 +2,6 @@ import React from 'react';
 import { aboutData, personalData } from '../data/portfolioData';
 import { 
   Layers, 
-  Cloud, 
   Zap, 
   CheckCircle2, 
   ShieldCheck, 
@@ -17,8 +16,8 @@ import {
 export default function About() {
   const iconMap = {
     Layers: Layers,
-    Cloud: Cloud,
     Zap: Zap,
+    ShieldCheck: ShieldCheck,
   };
 
   const highlights = [
@@ -63,7 +62,7 @@ export default function About() {
             <span>Engineering & Design Philosophy</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
-            Bridging <span className="text-gradient">Figma Design, ReactJS & Cloud Scale</span>
+            Bridging <span className="text-gradient">Figma Design, ReactJS & Scalable Architecture</span>
           </h2>
           <p className="text-slate-400 text-base sm:text-lg">
             5+ years of IT excellence at Tata Consultancy Services (TCS) delivering mission-critical insurance web applications.
@@ -87,7 +86,7 @@ export default function About() {
                 <div>
                   <h3 className="text-xl sm:text-2xl font-bold text-white">Nandini Reddy K</h3>
                   <span className="text-xs font-mono text-cyan-400 flex items-center gap-1.5 mt-0.5">
-                    <Building2 className="w-3.5 h-3.5" /> Tata Consultancy Services | Chennai
+                    <Building2 className="w-3.5 h-3.5" /> Tata Consultancy Services | Chennai (2021–2024)
                   </span>
                 </div>
               </div>
@@ -129,7 +128,7 @@ export default function About() {
           {/* Right 3 Pillars Cards (Span 5) */}
           <div className="lg:col-span-5 flex flex-col gap-5">
             {aboutData.pillars.map((pillar) => {
-              const IconComponent = iconMap[pillar.icon] || Cloud;
+              const IconComponent = iconMap[pillar.icon] || Layers;
               return (
                 <div
                   key={pillar.title}
@@ -160,7 +159,7 @@ export default function About() {
                 <HeartHandshake className="w-6 h-6 text-cyan-400" />
               </div>
               <div className="text-xs space-y-1">
-                <div className="text-slate-200 font-semibold text-sm">Open for Senior Frontend & UX Engineering Roles</div>
+                <div className="text-slate-200 font-semibold text-sm">Immediate Joiner • Senior Frontend & Full Stack</div>
                 <div className="text-cyan-400 font-mono text-xs">Chennai, Tamil Nadu, India / Hybrid & Remote</div>
               </div>
             </div>

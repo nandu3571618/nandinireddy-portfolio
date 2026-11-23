@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { X, ExternalLink, Cloud, CheckCircle, Cpu, Zap, Activity } from 'lucide-react';
+import { X, ExternalLink, Layers, CheckCircle, Cpu, Zap, Activity } from 'lucide-react';
 import { GithubIcon } from './Icons';
 
 export default function ProjectModal({ project, onClose }) {
@@ -111,11 +111,11 @@ export default function ProjectModal({ project, onClose }) {
 
           {/* Architecture Highlight */}
           {project.architectureHighlight && (
-            <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-start gap-3">
-              <Cloud className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+            <div className="p-4 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-start gap-3">
+              <Layers className="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" />
               <div>
-                <h5 className="text-xs font-bold uppercase tracking-wider text-amber-400">
-                  Cloud Architecture Pattern
+                <h5 className="text-xs font-bold uppercase tracking-wider text-cyan-400">
+                  Engineering Architecture Pattern
                 </h5>
                 <p className="text-xs sm:text-sm text-slate-300 mt-1 leading-relaxed">
                   {project.architectureHighlight}
@@ -124,20 +124,20 @@ export default function ProjectModal({ project, onClose }) {
             </div>
           )}
 
-          {/* AWS Services Used */}
-          {project.awsServices && (
+          {/* Key Highlights */}
+          {project.highlights && (
             <div>
               <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-400 mb-2 flex items-center gap-2">
-                <Cloud className="w-4 h-4 text-amber-400" />
-                <span>AWS Services Integrated</span>
+                <Zap className="w-4 h-4 text-cyan-400" />
+                <span>Core Capabilities</span>
               </h4>
               <div className="flex flex-wrap gap-2">
-                {project.awsServices.map((svc) => (
+                {project.highlights.map((hl) => (
                   <span
-                    key={svc}
-                    className="px-3 py-1 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs font-mono font-medium"
+                    key={hl}
+                    className="px-3 py-1 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 text-xs font-mono font-medium"
                   >
-                    AWS {svc}
+                    {hl}
                   </span>
                 ))}
               </div>

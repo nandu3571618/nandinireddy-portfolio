@@ -21,11 +21,6 @@ export default {
           hover: '#a5b4fc',
           purple: '#c084fc',
           pink: '#f472b6',
-        },
-        aws: {
-          orange: '#FF9900',
-          squid: '#232F3E',
-          smile: '#146EB4',
         }
       },
       fontFamily: {

@@ -3,21 +3,20 @@ import { projectsData } from '../data/portfolioData';
 import { 
   FolderGit2, 
   ExternalLink, 
-  Cloud, 
   Layers, 
   ArrowUpRight, 
   Eye, 
-  Sparkles,
-  Zap,
-  TrendingUp,
-  CheckCircle2
+  Sparkles, 
+  Zap, 
+  TrendingUp, 
+  CheckCircle2 
 } from 'lucide-react';
 import { GithubIcon } from './Icons';
 
 export default function Projects({ onSelectProject }) {
   const [filter, setFilter] = useState('All');
 
-  const categories = ['All', 'Full Stack', 'Cloud / AWS', 'UI / UX Design'];
+  const categories = ['All', 'Full Stack', 'Enterprise Web', 'UI / UX Design'];
 
   const filteredProjects = filter === 'All'
     ? projectsData
@@ -41,7 +40,7 @@ export default function Projects({ onSelectProject }) {
             Proven Systems & <span className="text-gradient">Production Architectures</span>
           </h2>
           <p className="text-slate-400 text-base sm:text-lg">
-            High-traffic insurance portals, microservices e-commerce engines, and real-time AWS serverless platforms.
+            High-traffic insurance portals, microservices e-commerce engines, and responsive digital web applications.
           </p>
         </div>
 
@@ -99,18 +98,20 @@ export default function Projects({ onSelectProject }) {
                     </div>
                   )}
 
-                  {/* AWS Cloud Badge Overlay */}
-                  <div className="absolute bottom-3 left-4 flex flex-wrap gap-1.5">
-                    {project.awsServices.slice(0, 3).map((svc) => (
-                      <span
-                        key={svc}
-                        className="text-[10px] font-mono px-2 py-0.5 rounded-lg bg-slate-950/85 text-amber-300 border border-amber-500/30 backdrop-blur-md flex items-center gap-1"
-                      >
-                        <Cloud className="w-3 h-3 text-amber-400" />
-                        {svc}
-                      </span>
-                    ))}
-                  </div>
+                  {/* Highlights Overlay */}
+                  {project.highlights && (
+                    <div className="absolute bottom-3 left-4 flex flex-wrap gap-1.5">
+                      {project.highlights.slice(0, 3).map((hl) => (
+                        <span
+                          key={hl}
+                          className="text-[10px] font-mono px-2 py-0.5 rounded-lg bg-slate-950/85 text-cyan-300 border border-cyan-500/30 backdrop-blur-md flex items-center gap-1"
+                        >
+                          <Zap className="w-2.5 h-2.5 text-cyan-400" />
+                          {hl}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 {/* Card Content */}

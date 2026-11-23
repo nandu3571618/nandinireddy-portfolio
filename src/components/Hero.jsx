@@ -5,7 +5,6 @@ import {
   Terminal as TerminalIcon, 
   Download, 
   Sparkles, 
-  Cloud, 
   ShieldCheck, 
   Cpu, 
   ExternalLink,
@@ -23,13 +22,13 @@ export default function Hero() {
   const [roleIndex, setRoleIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
-  const [terminalTab, setTerminalTab] = useState('cloud');
+  const [terminalTab, setTerminalTab] = useState('build');
 
   const roles = [
     'Senior Frontend ReactJS Developer',
     'Micro Frontends & UI Architect',
     'Certified UX Designer (Google)',
-    'Cloud-Native Web Specialist'
+    'Innoveo Certified Business Architect'
   ];
 
   // Typewriter effect
@@ -115,11 +114,11 @@ export default function Hero() {
               </a>
 
               <a
-                href="#architecture"
+                href="#experience"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-2xl glass-panel hover:bg-slate-800/90 text-slate-200 hover:text-white font-semibold text-sm border border-slate-700/80 hover:border-cyan-400/50 transition-all duration-300 transform hover:-translate-y-1 shadow-lg"
               >
-                <Cloud className="w-4 h-4 text-amber-400" />
-                <span>AWS Cloud Visualizer</span>
+                <Briefcase className="w-4 h-4 text-cyan-400" />
+                <span>Career Experience</span>
               </a>
 
               <a
@@ -174,18 +173,18 @@ export default function Hero() {
                   <span className="w-3 h-3 rounded-full bg-amber-500 inline-block shadow-[0_0_8px_rgba(245,158,11,0.6)]" />
                   <span className="w-3 h-3 rounded-full bg-emerald-500 inline-block shadow-[0_0_8px_rgba(16,185,129,0.6)]" />
                   <span className="ml-2 font-mono text-xs text-slate-400 flex items-center gap-1.5">
-                    <TerminalIcon className="w-3.5 h-3.5 text-cyan-400" /> nandini@tcs-cloud:~
+                    <TerminalIcon className="w-3.5 h-3.5 text-cyan-400" /> nandini@react-dev:~
                   </span>
                 </div>
                 
                 <div className="flex items-center gap-1.5 text-[11px] font-mono">
                   <button
-                    onClick={() => setTerminalTab('cloud')}
+                    onClick={() => setTerminalTab('build')}
                     className={`px-2.5 py-1 rounded-lg transition-colors ${
-                      terminalTab === 'cloud' ? 'bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/40' : 'text-slate-500 hover:text-slate-300'
+                      terminalTab === 'build' ? 'bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/40' : 'text-slate-500 hover:text-slate-300'
                     }`}
                   >
-                    aws-status.sh
+                    dev-build.sh
                   </button>
                   <button
                     onClick={() => setTerminalTab('profile')}
@@ -200,32 +199,30 @@ export default function Hero() {
 
               {/* Terminal Content Body */}
               <div className="p-6 font-mono text-xs sm:text-sm leading-relaxed overflow-x-auto min-h-[310px]">
-                {terminalTab === 'cloud' ? (
+                {terminalTab === 'build' ? (
                   <div className="space-y-3.5">
                     <div className="text-slate-400">
-                      <span className="text-emerald-400">$</span> aws cloudfront get-distribution --id E2PORTFOLIO
+                      <span className="text-emerald-400">$</span> npm run build && npm test
                     </div>
                     <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800 text-slate-300 text-xs space-y-1">
                       <div className="text-cyan-400 flex items-center justify-between">
-                        <span>Status: <strong className="text-emerald-400">Deployed Globally</strong></span>
-                        <span className="text-[10px] text-slate-500">400+ PoPs</span>
+                        <span>Build Status: <strong className="text-emerald-400">✓ Production Ready</strong></span>
+                        <span className="text-[10px] text-slate-500">Vite + React 18</span>
                       </div>
-                      <div className="text-slate-400">Target Origin: <span className="text-slate-200">s3://nandini-portfolio-prod</span></div>
-                      <div className="text-slate-400">Security: <span className="text-emerald-400">OAC + TLSv1.3 (Strict HTTPS)</span></div>
+                      <div className="text-slate-400">Architecture: <span className="text-slate-200">Micro Frontends + Redux Toolkit</span></div>
+                      <div className="text-slate-400">Quality: <span className="text-emerald-400">100% Component Integrity Passed</span></div>
                     </div>
 
                     <div className="text-slate-400 pt-1">
-                      <span className="text-emerald-400">$</span> curl -X POST https://api.aws/contact \
-                      <br />
-                      &nbsp;&nbsp;-d '&#123; "lead": "TCS Enterprise Recruiter", "status": "Ready to Interview" &#125;'
+                      <span className="text-emerald-400">$</span> git log -1 --pretty=format:"%h - %s"
                     </div>
                     <div className="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/40 text-emerald-300 text-xs">
-                      &#123; "statusCode": 200, "message": "Connection established! Available for Senior Frontend roles." &#125;
+                      "feat: enterprise insurance micro-frontend modules • Ready for senior roles"
                     </div>
 
                     <div className="text-slate-500 pt-1 flex items-center gap-2">
                       <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-                      <span className="text-xs">Serverless pipeline listening for dispatches...</span>
+                      <span className="text-xs">Immediate Joiner for Senior Frontend & Full Stack roles</span>
                     </div>
                   </div>
                 ) : (
@@ -233,17 +230,19 @@ export default function Hero() {
                     <span className="text-slate-500">// Nandini Reddy K • Professional Profile</span>
                     <pre className="text-cyan-300">{`{
   "name": "Nandini Reddy K",
-  "company": "Tata Consultancy Services",
-  "experience": "5+ Years",
+  "company_experience": "Tata Consultancy Services (2021–2024)",
+  "total_experience": "5+ Years IT",
   "core_stack": [
     "ReactJS 18+", "Redux Toolkit", 
-    "Micro Frontends", "Tailwind CSS"
+    "Micro Frontends", "Tailwind CSS",
+    "JavaScript ES6+", "HTML5/CSS3"
   ],
   "certifications": [
     "Google UX Design Professional",
     "Innoveo Certified Business Architect"
   ],
   "education": "B.E. ECE - Prathyusha Eng. College",
+  "availability": "Immediate Joiner",
   "location": "Chennai, Tamil Nadu, India"
 }`}</pre>
                   </div>
@@ -254,9 +253,9 @@ export default function Hero() {
               <div className="px-5 py-3 bg-slate-950/80 border-t border-slate-800 flex items-center justify-between text-[11px] font-mono text-slate-400">
                 <span className="flex items-center gap-1.5 text-emerald-400 font-semibold">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  All Cloud Services Nominal
+                  All Tests Passing • Production Ready
                 </span>
-                <span className="text-slate-400">Region: <code className="text-cyan-400">ap-south-1</code></span>
+                <span className="text-slate-400">Location: <code className="text-cyan-400">Chennai, IN</code></span>
               </div>
 
             </div>
@@ -267,7 +266,7 @@ export default function Hero() {
                 <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                 <span>Enterprise Insurance Domain Specialist</span>
               </div>
-              <span className="font-mono text-cyan-400 font-semibold">5+ Years TCS</span>
+              <span className="font-mono text-cyan-400 font-semibold">5+ Years IT</span>
             </div>
 
           </div>
