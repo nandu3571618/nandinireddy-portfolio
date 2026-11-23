@@ -86,7 +86,7 @@ export default function About() {
                 <div>
                   <h3 className="text-xl sm:text-2xl font-bold text-white">Nandini Reddy K</h3>
                   <span className="text-xs font-mono text-cyan-400 flex items-center gap-1.5 mt-0.5">
-                    <Building2 className="w-3.5 h-3.5" /> Tata Consultancy Services | Chennai (2021–2024)
+                    <Building2 className="w-3.5 h-3.5" /> Tata Consultancy Services | Chennai (2021–2026)
                   </span>
                 </div>
               </div>

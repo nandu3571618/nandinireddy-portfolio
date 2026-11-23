@@ -230,7 +230,7 @@ export default function Hero() {
                     <span className="text-slate-500">// Nandini Reddy K • Professional Profile</span>
                     <pre className="text-cyan-300">{`{
   "name": "Nandini Reddy K",
-  "company_experience": "Tata Consultancy Services (2021–2024)",
+  "company_experience": "Tata Consultancy Services (2021–2026)",
   "total_experience": "5+ Years IT",
   "core_stack": [
     "ReactJS 18+", "Redux Toolkit", 

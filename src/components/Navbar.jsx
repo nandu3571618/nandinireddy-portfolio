@@ -92,7 +92,7 @@ export default function Navbar() {
         <div className="hidden lg:flex items-center gap-3">
           <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-slate-700/80 text-xs text-slate-300 shadow-sm">
             <span className="w-2 h-2 rounded-full bg-emerald-400 cyber-beacon" />
-            <span className="text-slate-400 font-mono text-[11px]">TCS 2021–2024</span>
+            <span className="text-slate-400 font-mono text-[11px]">TCS 2021–2026</span>
             <span className="text-emerald-400 font-medium">Immediate Joiner</span>
           </div>
 

@@ -247,7 +247,7 @@ export const experienceData = [
   {
     role: "Frontend ReactJS Developer",
     company: "Tata Consultancy Services | Chennai",
-    period: "May 2023 – Oct 2024",
+    period: "May 2023 – Oct 2026",
     location: "Chennai, Tamil Nadu, India",
     description: "Spearheaded the frontend architecture and user interface engineering of the Enterprise Insurance Customer Service & Policy Management Platform.",
     achievements: [

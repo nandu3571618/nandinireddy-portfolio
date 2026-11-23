@@ -129,7 +129,7 @@ export default function Skills() {
               <h3 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
                 <span>Enterprise Insurance Domain Specialist</span>
                 <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                  TCS (2021–2024)
+                  TCS (2021–2026)
                 </span>
               </h3>
               <p className="text-sm text-slate-400 mt-1 max-w-2xl leading-relaxed">
